@@ -50,6 +50,18 @@ def get_member(id):
     member = jackson_family.get_member(id)
     return member
 
+@app.route ('/member/update/<int:id>', methods = ['POST'])
+def update_member(id):
+    member = request.get_json()
+    # print(member)
+    updated_member = jackson_family.update_member(id, member)
+    return updated_member
+
+@app.route ('/member/delete/<int:id>', methods = ['POST'])
+def delete_member(id):
+    new_members = jackson_family.delete_member(id)
+    return new_members
+
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))

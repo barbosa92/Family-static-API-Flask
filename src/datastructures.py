@@ -40,7 +40,7 @@ class FamilyStructure:
 
     # read-only: Use this method to generate random members ID's when adding members into the list
     def generateId(self):
-        return randint(0, 10)
+        return randint(0, 100)
 
     def add_member(self, member):
         ## you have to implement this method
@@ -53,12 +53,49 @@ class FamilyStructure:
     def delete_member(self, id):
         ## you have to implement this method
         ## append the member to the list of _members
-        pass
+        members = self._members
+        for obj in members:
+            if obj['id'] == id:
+                print(obj)
+                index = members.index(obj)
+                print(index)
+                members.remove(obj)
+                print(members)
+                return "Member removed"
 
     def update_member(self, id, member):
         ## you have to implement this method
         ## loop the list and replace the member with the given id
-        pass
+        # print("Entra en update_member")
+        # print(id)
+        # print(member)
+        members = self._members
+        for obj in members:
+            if obj['id'] == id:
+                # print("Encuentra un id")
+                # print(obj)
+                # print(obj['first_name'])
+                # print(member['first_name'])
+                for key, value in member.items():
+                    # print("Entra en el bucle")
+                    # print(key)
+                    # print(value)
+
+                    if key == "first_name" and value != None:
+                        obj['first_name'] = member['first_name']
+
+                    elif key == "age" and value != None:
+                        obj['age'] = member['age']
+                        
+                    elif key == "lucky_numbers" and value != None:
+                        obj['lucky_numbers'] = member['lucky_numbers']
+                        return "Modified"
+                        
+                    else:
+                        return "No se ha modificado ningún campo"
+                
+            else:
+                return "No se ha encontrado ningún miembro con ese id"
 
     def get_member(self, id):
         ## you have to implement this method
@@ -68,7 +105,7 @@ class FamilyStructure:
             if obj['id'] == id:
                 position = members.index(obj)
                 member = members[position]
-                print(member)
+                # print(member)
                 return member
 
     # this method is done, it returns a list with all the family members
