@@ -45,22 +45,22 @@ def add_member():
     jackson_family.add_member(request_body)
     return jsonify("Miembro añadido")
 
-@app.route ('/member/<int:id>', methods = ['POST'])
+@app.route ('/member/<int:id>', methods = ['GET'])
 def get_member(id):
-    member = jackson_family.get_member(id)
-    return member
+    response_body = jackson_family.get_member(id)
+    return jsonify(response_body), 200
 
 @app.route ('/member/update/<int:id>', methods = ['POST'])
 def update_member(id):
     member = request.get_json()
     # print(member)
     updated_member = jackson_family.update_member(id, member)
-    return updated_member
+    return jsonify(updated_member), 200
 
-@app.route ('/member/delete/<int:id>', methods = ['POST'])
+@app.route ('/member/delete/<int:id>', methods = ['DELETE'])
 def delete_member(id):
     new_members = jackson_family.delete_member(id)
-    return new_members
+    return jsonify("done","finished"), 200
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
